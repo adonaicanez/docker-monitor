@@ -1,14 +1,12 @@
 #!/bin/bash
 
-export SYSTEM_DIR=/dev/shm/docker-monitor
+export DIR_INSTALL_DOCKER_MONITOR=/srv/docker-monitor/opt/docker-monitor
+
 export CONTAINER_DIR=${SYSTEM_DIR}/container
 export SYSTEM_STATS=${SYSTEM_DIR}/system
 export TEMP_DIR=${SYSTEM_DIR}/temp
 
 export LISTA_CNTNER_EM_EXEC=${TEMP_DIR}/containers_execucao.txt
-
-export DIR_INSTALL_DOCKER_MONITOR=/srv/docker-monitor
-SLEEP_TIME=5
 
 mkdir -p ${SYSTEM_DIR}
 mkdir -p ${SYSTEM_STATS}
@@ -24,12 +22,14 @@ sleep 6
 
 while [ ${RUN_SCRIPT} -eq 0 ]
 do
+	startTime=$(date +%s)
 	cat ${LISTA_CNTNER_EM_EXEC} > ${TEMP_DIR}/containers_t1.txt
 	while read cntner
 	do
 		curl -XGET -s --unix-socket /var/run/docker.sock http:/v1.4/containers/${cntner}/stats?stream=false > ${TEMP_DIR}/cntner.stats
-		cat ${TEMP_DIR}/cntner.stats > ${CONTAINER_DIR}/${cntner}/cntner.stats
-
+		cat ${TEMP_DIR}/cntner.stats > ${CONTAINER_DIR}/${cntner}/cntner.stats 2>/dev/null
+		
+		#echo "Percorrendo as interfaces de rede do conainer ${cntner} - script 1"
 		#
 		# Percorre os containers pegando a lista de interfaces de rede e gerando as estatisticas de utilização de cada uma delas
 		#
@@ -55,11 +55,17 @@ do
 		temp1=$(docker inspect --format='{{json .State.StartedAt}}' ${cntner})
 		temp2=$(echo $temp1 | tr -d "\"") 
 		temp3=$(date --date="$temp2" +%s)
-		echo $temp3 > ${CONTAINER_DIR}/${cntner}/system/startedAt
-
-		echo "executando container: ${cntner}"
-   		sleep ${SLEEP_TIME}
+		echo $temp3 > ${CONTAINER_DIR}/${cntner}/system/startedAt 2>/dev/null
 	done < ${TEMP_DIR}/containers_t1.txt
+
+	finishTime=$(date +%s)
+	timeExecution=$((${finishTime}-${startTime} ))
+	#echo tempo de execução script 1: $timeExecution
+	if [ $timeExecution -le 60 ]
+	then
+		sleep $((60 - $timeExecution))
+	fi
+
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 done
 exit 0

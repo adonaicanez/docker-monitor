@@ -25,12 +25,10 @@ function converte_byte () {
 	esac
 }
 
-#
-#
-
 RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 while [ ${RUN_SCRIPT} -eq 0 ]
 do
+	startTime=$(date +%s)
     docker stats --no-stream | grep -v "CONTAINER ID" > ${TEMP_DIR}/docker.stats.ctnr
 	cat ${TEMP_DIR}/docker.stats.ctnr | awk '{print $2}' > ${LISTA_CNTNER_EM_EXEC}
 	
@@ -43,8 +41,8 @@ do
 		cat ${LISTA_CNTNER_EM_EXEC} | grep ${dircont} 1>/dev/null 2>/dev/null
 		if [ $? -ne 0 ]
 		then
-			#rm -rf  ${CONTAINER_DIR}/${dircont}	
-			echo vai remover: ${CONTAINER_DIR}/${dircont}
+			rm -rf  ${CONTAINER_DIR}/${dircont}	
+			#echo Removeu o diretorio: ${CONTAINER_DIR}/${dircont} - script 2
 		fi
 	done < ${TEMP_DIR}/containers_ls_t2.txt 	
 
@@ -97,7 +95,15 @@ do
 		echo $result_func > ${CONTAINER_DIR}/${container}/disc/block_write
 
     done < $TEMP_DIR/docker.stats.ctnr
-    sleep ${SLEEP_TIME}
+	
+    finishTime=$(date +%s)
+    timeExecution=$((${finishTime}-${startTime} ))
+    #echo tempo de execução script 2: $timeExecution
+    if [ $timeExecution -le 60 ]
+    then
+        sleep $((60 - $timeExecution))
+    fi
+
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 done
 

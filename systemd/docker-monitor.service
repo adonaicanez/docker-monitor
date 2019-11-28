@@ -1,0 +1,13 @@
+[Unit]
+Description="Servidor Tomcat da Aplicação saudiSRH"
+After=docker.service
+
+[Service]
+type=simple
+
+ExecStart=/opt/docker-monitor/docker-monitor.sh start
+ExecStop=/opt/docker-monitor/docker-monitor.sh stop
+
+[Install]
+WantedBy=multi-user.target
+

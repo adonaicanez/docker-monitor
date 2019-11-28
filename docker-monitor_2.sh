@@ -25,12 +25,33 @@ function converte_byte () {
 	esac
 }
 
-echo 0 > ${SYSTEM_DIR}/run.script
+#
+#
+
 RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 while [ ${RUN_SCRIPT} -eq 0 ]
 do
-    docker stats --no-stream | grep -v "CONTAINER ID" > $TEMP_DIR/docker.stats.ctnr
-	while read cntner
+    docker stats --no-stream | grep -v "CONTAINER ID" > ${TEMP_DIR}/docker.stats.ctnr
+	cat ${TEMP_DIR}/docker.stats.ctnr | awk '{print $2}' > ${LISTA_CNTNER_EM_EXEC}
+	
+	#
+	# Mantem a lista de containers em execução atualizada, removendo diretorios de containers que foram parados
+	#
+	/bin/ls -l ${CONTAINER_DIR} | grep ^drwxr | awk '{print $9}' > ${TEMP_DIR}/containers_ls_t2.txt
+	while read dircont
+	do
+		cat ${LISTA_CNTNER_EM_EXEC} | grep ${dircont} 1>/dev/null 2>/dev/null
+		if [ $? -ne 0 ]
+		then
+			#rm -rf  ${CONTAINER_DIR}/${dircont}	
+			echo vai remover: ${CONTAINER_DIR}/${dircont}
+		fi
+	done < ${TEMP_DIR}/containers_ls_t2.txt 	
+
+	#
+	# Cria a estrutura de diretórios dos containers em execução 
+	# 
+	while read cntner 
     do
 		container=$(echo $cntner | awk '{print $2}')
 		if [ ! -d ${CONTAINER_DIR}/${container} ]
@@ -79,3 +100,4 @@ do
     sleep ${SLEEP_TIME}
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 done
+

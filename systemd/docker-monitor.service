@@ -3,11 +3,12 @@ Description="Serviço de monitoramento do docker"
 After=docker.service
 
 [Service]
-type=forking
-
+Type=exec
+User=root
 ExecStart=/opt/docker-monitor/docker-monitor.sh start
 ExecStop=/opt/docker-monitor/docker-monitor.sh stop
+PIDFile=docker-monitor.pid
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
-

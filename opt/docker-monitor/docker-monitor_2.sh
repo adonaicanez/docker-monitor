@@ -1,11 +1,5 @@
 #!/bin/bash
 
-ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_2.sh" 1>/dev/null 2>/dev/null
-if [ $? -eq 0 ]
-then
-    exit 1
-fi
-
 function converte_byte () {
 	valor=$(echo $1 | sed -n -r 's/([[:digit:]\.]*).*/\1/p')
 	unidade=$(echo $1 | sed -n -r 's/([[:digit:]\.]*)(.*)/\2/p')
@@ -99,6 +93,7 @@ do
 		echo $result_func > ${CONTAINER_DIR}/${container}/disc/block_write
 
     done < ${TEMP_DIR}/docker.stats.ctnr
+	rm -f ${TEMP_DIR}/docker.stats.ctnr
 	
     finishTime=$(date +%s)
     timeExecution=$((${finishTime}-${startTime} ))
@@ -110,4 +105,8 @@ do
 
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 done
+rm -f ${TEMP_DIR}/docker.stats.ctnr
+rm -f ${TEMP_DIR}/containers_ls_t2.txt
+
+
 exit 0

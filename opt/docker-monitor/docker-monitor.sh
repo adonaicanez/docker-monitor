@@ -13,6 +13,7 @@ case ${OPCAO} in
     		echo "já tem um processo executando"
     		exit 1
 		else
+			echo "Iniciando o script 1"
 			/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_1.sh &
 		fi
 	;;

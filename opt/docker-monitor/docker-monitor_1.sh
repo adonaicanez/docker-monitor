@@ -19,6 +19,7 @@ ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-mon
 if [ $? -ne 0 ]
 then
 	/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_2.sh & 
+	echo "Iniciando o script 2"
 	sleep 6
 fi
 
@@ -72,4 +73,8 @@ do
 
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 done
+rm -f ${TEMP_DIR}/temp_network.txt
+rm -f ${TEMP_DIR}/containers_t1.txt
+rm -f ${TEMP_DIR}/cntner.stats
+
 exit 0

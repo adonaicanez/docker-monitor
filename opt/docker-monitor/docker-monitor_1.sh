@@ -1,11 +1,5 @@
 #!/bin/bash
 
-ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_1.sh" 1>/dev/null 2>/dev/null 
-if [ $? -eq 0 ]
-then
-	exit 1
-fi
-
 export CONTAINER_DIR=${SYSTEM_DIR}/container
 export SYSTEM_STATS=${SYSTEM_DIR}/system
 export TEMP_DIR=${SYSTEM_DIR}/temp
@@ -21,8 +15,12 @@ chmod 777 ${TEMP_DIR}
 echo 0 > ${SYSTEM_DIR}/run.script
 RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 
-/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_2.sh & 
-sleep 6
+ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_2.sh" 1>/dev/null 2>/dev/null
+if [ $? -ne 0 ]
+then
+	/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_2.sh & 
+	sleep 6
+fi
 
 while [ ${RUN_SCRIPT} -eq 0 ]
 do

@@ -7,8 +7,14 @@ OPCAO=$1
 
 case ${OPCAO} in
 	start)
-		/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_1.sh &
-		echo $#
+		ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_1.sh"
+		if [ $? -eq 0 ]
+		then
+    		echo "já tem um processo executando"
+    		exit 1
+		else
+			/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_1.sh &
+		fi
 	;;
 	stop)
 		echo 1 > ${SYSTEM_DIR}/run.script

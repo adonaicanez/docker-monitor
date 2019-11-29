@@ -1,6 +1,10 @@
 #!/bin/bash
 
-SLEEP_TIME=15
+ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_2.sh" 1>/dev/null 2>/dev/null
+if [ $? -eq 0 ]
+then
+    exit 1
+fi
 
 function converte_byte () {
 	valor=$(echo $1 | sed -n -r 's/([[:digit:]\.]*).*/\1/p')
@@ -42,9 +46,9 @@ do
 		if [ $? -ne 0 ]
 		then
 			rm -rf  ${CONTAINER_DIR}/${dircont}	
-			#echo Removeu o diretorio: ${CONTAINER_DIR}/${dircont} - script 2
 		fi
 	done < ${TEMP_DIR}/containers_ls_t2.txt 	
+	rm -f ${TEMP_DIR}/containers_ls_t2.txt
 
 	#
 	# Cria a estrutura de diretórios dos containers em execução 
@@ -94,11 +98,11 @@ do
 		converte_byte $temp1
 		echo $result_func > ${CONTAINER_DIR}/${container}/disc/block_write
 
-    done < $TEMP_DIR/docker.stats.ctnr
+    done < ${TEMP_DIR}/docker.stats.ctnr
 	
     finishTime=$(date +%s)
     timeExecution=$((${finishTime}-${startTime} ))
-    #echo tempo de execução script 2: $timeExecution
+
     if [ $timeExecution -le 60 ]
     then
         sleep $((60 - $timeExecution))
@@ -106,4 +110,4 @@ do
 
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 done
-
+exit 0

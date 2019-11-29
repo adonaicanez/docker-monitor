@@ -1,12 +1,16 @@
 #!/bin/bash
 
-export DIR_INSTALL_DOCKER_MONITOR=/srv/docker-monitor/opt/docker-monitor
+ps aux | grep -v grep | grep "/bin/bash ${DIR_INSTALL_DOCKER_MONITOR}/docker-monitor_1.sh" 1>/dev/null 2>/dev/null 
+if [ $? -eq 0 ]
+then
+	exit 1
+fi
 
 export CONTAINER_DIR=${SYSTEM_DIR}/container
 export SYSTEM_STATS=${SYSTEM_DIR}/system
 export TEMP_DIR=${SYSTEM_DIR}/temp
 
-export LISTA_CNTNER_EM_EXEC=${TEMP_DIR}/containers_execucao.txt
+export LISTA_CNTNER_EM_EXEC=${SYSTEM_STATS}/containers_execucao.txt
 
 mkdir -p ${SYSTEM_DIR}
 mkdir -p ${SYSTEM_STATS}
@@ -28,8 +32,8 @@ do
 	do
 		curl -XGET -s --unix-socket /var/run/docker.sock http:/v1.4/containers/${cntner}/stats?stream=false > ${TEMP_DIR}/cntner.stats
 		cat ${TEMP_DIR}/cntner.stats > ${CONTAINER_DIR}/${cntner}/cntner.stats 2>/dev/null
+		rm -f ${TEMP_DIR}/cntner.stats
 		
-		#echo "Percorrendo as interfaces de rede do conainer ${cntner} - script 1"
 		#
 		# Percorre os containers pegando a lista de interfaces de rede e gerando as estatisticas de utilização de cada uma delas
 		#
@@ -48,7 +52,8 @@ do
 			cat ${CONTAINER_DIR}/${cntner}/cntner.stats | jq .networks.${neteth}.rx_bytes > ${CONTAINER_DIR}/${cntner}/network/${neteth}/rx_bytes
 			cat ${CONTAINER_DIR}/${cntner}/cntner.stats | jq .networks.${neteth}.tx_bytes > ${CONTAINER_DIR}/${cntner}/network/${neteth}/tx_bytes
 		done < ${TEMP_DIR}/temp_network.txt
-		
+		rm -f ${TEMP_DIR}/temp_network.txt
+	
 		#
 		# disponibiliza a informação de inicialização do container
 		#
@@ -57,10 +62,11 @@ do
 		temp3=$(date --date="$temp2" +%s)
 		echo $temp3 > ${CONTAINER_DIR}/${cntner}/system/startedAt 2>/dev/null
 	done < ${TEMP_DIR}/containers_t1.txt
+	rm -f ${TEMP_DIR}/containers_t1.txt
 
 	finishTime=$(date +%s)
 	timeExecution=$((${finishTime}-${startTime} ))
-	#echo tempo de execução script 1: $timeExecution
+
 	if [ $timeExecution -le 60 ]
 	then
 		sleep $((60 - $timeExecution))

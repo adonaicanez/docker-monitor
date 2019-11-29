@@ -1,9 +1,9 @@
 [Unit]
-Description="Servidor Tomcat da Aplicação saudiSRH"
+Description="Serviço de monitoramento do docker"
 After=docker.service
 
 [Service]
-type=simple
+type=forking
 
 ExecStart=/opt/docker-monitor/docker-monitor.sh start
 ExecStop=/opt/docker-monitor/docker-monitor.sh stop

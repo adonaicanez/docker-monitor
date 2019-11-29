@@ -2,11 +2,15 @@
 
 cp systemd/docker-monitor.service /etc/systemd/system/
 
-mkdir /opt/docker-monitor/
-cp opt/docker-monitor/docker-monitor.sh /opt/docker-monitor/
-cp opt/docker-monitor/docker-monitor_1.sh /opt/docker-monitor/
-cp opt/docker-monitor/docker-monitor_2.sh /opt/docker-monitor/
+if [ ! -e  /opt/docker-monitor ]
+then
+	mkdir /opt/docker-monitor/
+fi
 
-cp autodiscovery/docker-interfaces.sh /opt/docker-monitor/
-cp autodiscovery/docker-discovery.sh /opt/docker-monitor/
+cp -f opt/docker-monitor/docker-monitor.sh /opt/docker-monitor/
+cp -f opt/docker-monitor/docker-monitor_1.sh /opt/docker-monitor/
+cp -f opt/docker-monitor/docker-monitor_2.sh /opt/docker-monitor/
+
+cp -f autodiscovery/docker-interfaces.sh /opt/docker-monitor/
+cp -f autodiscovery/docker-discovery.sh /opt/docker-monitor/
 

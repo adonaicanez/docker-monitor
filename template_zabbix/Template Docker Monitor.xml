@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-12-18T12:15:33Z</date>
+    <date>2019-12-18T12:36:55Z</date>
     <groups>
         <group>
             <name>Templates TRE</name>
@@ -49,7 +49,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>0d</lifetime>
+                    <lifetime>5d</lifetime>
                     <description>Regra de Descoberta de Containers desenvolvido pela SSR</description>
                     <item_prototypes>
                         <item_prototype>
@@ -1076,7 +1076,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>0d</lifetime>
+                    <lifetime>5d</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>

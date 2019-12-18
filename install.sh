@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cp systemd/docker-monitor.service /etc/systemd/system/
+cp -f systemd/docker-monitor.service /etc/systemd/system/
+
+systemctl daemon-reload
 
 if [ ! -e  /opt/docker-monitor ]
 then

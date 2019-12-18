@@ -3,6 +3,7 @@
 export CONTAINER_DIR=${SYSTEM_DIR}/container
 export SYSTEM_STATS=${SYSTEM_DIR}/system
 export TEMP_DIR=${SYSTEM_DIR}/temp
+export SLEEP_TIME=100 
 
 export LISTA_CNTNER_EM_EXEC=${SYSTEM_STATS}/containers_execucao.txt
 
@@ -66,9 +67,9 @@ do
 	finishTime=$(date +%s)
 	timeExecution=$((${finishTime}-${startTime} ))
 
-	if [ $timeExecution -le 60 ]
+	if [ $timeExecution -le ${SLEEP_TIME} ]
 	then
-		sleep $((60 - $timeExecution))
+		sleep $(( ${SLEEP_TIME} - ${timeExecution} ))
 	fi
 
 	RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)

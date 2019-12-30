@@ -1,3 +1,3 @@
 # docker-monitor
 
-Serviço para monitoramento dos contêineres  docker
+Serviço para monitoramento dos contêineres docker

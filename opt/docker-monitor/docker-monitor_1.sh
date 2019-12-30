@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# esse script é o responsavel por disponibilizar as estatisticas que são coletadas via chamadas da api do docker
+#
+#
 
 export CONTAINER_DIR=${SYSTEM_DIR}/container
 export SYSTEM_STATS=${SYSTEM_DIR}/system

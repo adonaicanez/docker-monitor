@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Esse script disponibiliza as estatisticas que são geradas cma a execução do comando "docker stats"
+#
+#
+
 
 function converte_byte () {
 	valor=$(echo $1 | sed -n -r 's/([[:digit:]\.]*).*/\1/p')

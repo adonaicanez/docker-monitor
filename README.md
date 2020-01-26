@@ -29,3 +29,5 @@ root@ns4:~/docker-monitor# ./install.sh
 root@ns4:~# systemctl status docker-monitor.service
 
 4) Agora é só importar para o zabbix server o template de itens chamado Template-Docker-monitor.xml, que esta no diretório /docker-monitor/template_zabbix e vincular ele nó servidor que o serviço esta rodando, dentro de alguns minutos os containers e itens irão começar a aparecer no zabbix.
+
+Obs: Esse instalador foi testado no Debian 10, com o Zabbix-agent e o docker instalados atraves dos repositórios oficias de cada projeto, quem uitilizar versões de linux diferentes pode ser necessário fazer alguns ajustes para que tudo funcione perfeitamente.

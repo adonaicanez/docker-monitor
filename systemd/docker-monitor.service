@@ -1,5 +1,5 @@
 [Unit]
-Description="Serviço de monitoramento do docker"
+Description="Serviço de monitoramento do docker para o Zabbix"
 After=docker.service
 
 [Service]

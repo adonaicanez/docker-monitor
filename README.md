@@ -14,7 +14,7 @@ A instalação do sistema é bem simples. Executar todos os comandos comoo root,
 1) Clonar o projeto no computador que ele vai ser instalado.
 root@ns4:~# git clone https://github.com/adonaicanez/docker-monitor.git
 
-2)Entrar na pasta raiz do projeto docker-monitor que foi criada pelo git clone e executar o arquivo de instalação.
+2) Entrar na pasta raiz do projeto docker-monitor que foi criada pelo git clone e executar o arquivo de instalação.
 Esse instalador ira copiar os arquivos do projeto para os seguintes diretórios:
 /etc/systemd/system/ - arquivo que controla o service do projeto, ele ira iniciar e parar o serviço de coleta de estatisticas.
 /opt/docker-monitor/ - nesse diretório ira ficar os scripts do serviço que realizam as coletas das estatisticas dos containers.
@@ -24,7 +24,7 @@ tambem vai ser habilitado e inicilizado o serviço do docker-monitor no systemd
 
 root@ns4:~/docker-monitor# ./install.sh
 
-3)Verifique se realmente o serviço docker-monitor estar em execução
+3) Verifique se realmente o serviço docker-monitor estar em execução
 
 root@ns4:~# systemctl status docker-monitor.service
 

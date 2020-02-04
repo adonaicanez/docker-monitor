@@ -12,6 +12,7 @@ Instalação
 A instalação do sistema é bem simples. Executar todos os comandos comoo root, no servidor que o módulo vai ser instalado. Antes de começar a instalação é necessa´rio que voce já tenha instalado nesse servidor o Docker e o agente do zabbix, ambos já configurados e funcionando.
 
 1) Clonar o projeto no computador que ele vai ser instalado.
+
 root@ns4:~# git clone https://github.com/adonaicanez/docker-monitor.git
 
 2) Entrar na pasta raiz do projeto docker-monitor que foi criada pelo git clone e executar o arquivo de instalação.

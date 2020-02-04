@@ -2,7 +2,7 @@ Descrição
 
 Esse projeto tem a proposta de criar um serviço que execute no linux para realizar a coleta das informações de containers Docker, disponibilizando para o monitoramento pelo Zabbix 4.
 
-O foco do sistema é executar sem precisar instalar pacotes novos no sistema operaçional o que é ruim para servidores que estejam em produção, pois aumenta a lista de vulnerablidades do SO e deixam o sistema mais pesado e lento.
+O foco do sistema é executar sem precisar instalar pacotes novos no sistema operacional o que é ruim para servidores que estejam em produção, pois aumenta a lista de vulnerablidades do SO e deixam o sistema mais pesado e lento.
 
 Buscando essa caracteristica o docker-monitor é escrito em shell script, tentando utilizar apenas recursos que mesmo a instalação mais mais básica do sistema tera capacidade de atender.
 

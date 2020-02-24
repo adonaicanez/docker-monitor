@@ -39,7 +39,7 @@ do
 		cat "$LISTA_CNTNER_EM_EXEC" | grep "$dircont" 1>/dev/null 2>/dev/null
 		if [ $? -ne 0 ]
 		then
-			rm -rf  "$CONTAINER_DIR"/"$dircont"	
+			rm -rf  "${CONTAINER_DIR:?}"/"${dircont:?}"	
 		fi
 	done < "$TEMP_DIR"/containers_ls_t2.txt 	
 	rm -f "$TEMP_DIR"/containers_ls_t2.txt

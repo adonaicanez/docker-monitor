@@ -28,7 +28,7 @@ while [ "$RUN_SCRIPT" -eq 0 ]
 do
 	startTime=$(date +%s)
     docker stats --no-stream | grep -v "CONTAINER ID" > "$TEMP_DIR"/docker.stats.ctnr
-	cat "$TEMP_DIR"/docker.stats.ctnr | awk '{print $2}' > "$LISTA_CNTNER_EM_EXEC"
+	awk '{print $2}' "$TEMP_DIR"/docker.stats.ctnr > "$LISTA_CNTNER_EM_EXEC"
 	
 	#
 	# Mantem a lista de containers em execução atualizada, removendo diretorios de containers que foram parados

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function converte_byte () {
-	valor="$(echo $1 | sed -n -r 's/([[:digit:]\.]*).*/\1/p')"
-	unidade="$(echo $1 | sed -n -r 's/([[:digit:]\.]*)(.*)/\2/p')"
+	valor="$(echo "$1" | sed -n -r 's/([[:digit:]\.]*).*/\1/p')"
+	unidade="$(echo "$1" | sed -n -r 's/([[:digit:]\.]*)(.*)/\2/p')"
 
 	case $unidade in
 		B)

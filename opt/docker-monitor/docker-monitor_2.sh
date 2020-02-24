@@ -62,11 +62,11 @@ do
 
 		temp1=$(echo "$cntner" | awk '{print $3}')
 		temp2=$(echo "$temp1" | sed -n -r 's/(.*)%/\1/p')
-		echo $temp2 > ${CONTAINER_DIR}/${container}/cpu/usage
+		echo "$temp2" > "$CONTAINER_DIR"/"$container"/cpu/usage
 		
 		temp1=$(echo "$cntner" | awk '{print $4}')
 		converte_byte "$temp1"
-		echo $result_func > "$CONTAINER_DIR"/"$container"/memory/usage
+		echo "$result_func" > "$CONTAINER_DIR"/"$container"/memory/usage
 
 		temp1=$(echo "$cntner" | awk '{print $6}')
 		converte_byte "$temp1"
@@ -88,7 +88,7 @@ do
 		converte_byte "$temp1"
 		echo $result_func > "$CONTAINER_DIR"/"$container"/disc/block_read
 
-		temp1=$(echo $cntner | awk '{print $13}')
+		temp1=$(echo "$cntner" | awk '{print $13}')
 		converte_byte "$temp1"
 		echo "$result_func" > "$CONTAINER_DIR"/"$container"/disc/block_write
 

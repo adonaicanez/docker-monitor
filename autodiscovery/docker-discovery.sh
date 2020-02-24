@@ -19,7 +19,7 @@ i=$( jq length $DOCKER_SOCK_FILE )
 echo -ne "{\n"
 echo -ne "\t\"data\":[\n\n"
 
-while [ $i -gt 0 ]
+while [ "$i" -gt 0 ]
 do
     let i=$i-1
     if [ $i -eq 0 ]

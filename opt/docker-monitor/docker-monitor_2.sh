@@ -90,7 +90,7 @@ do
 
 		temp1=$(echo $cntner | awk '{print $13}')
 		converte_byte "$temp1"
-		echo $result_func > "$CONTAINER_DIR"/"$container"/disc/block_write
+		echo "$result_func" > "$CONTAINER_DIR"/"$container"/disc/block_write
 
     done < "$TEMP_DIR"/docker.stats.ctnr
 	rm -f "${TEMP_DIR:?}/"docker.stats.ctnr

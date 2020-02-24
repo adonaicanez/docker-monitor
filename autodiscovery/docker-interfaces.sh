@@ -1,7 +1,7 @@
 #!/bin/bash
   
 BASE_DIRECTORY_RAM_NET=/dev/shm/docker-monitor/
-BASE_DIRECTORY_RAM_NET_CONTAINER=${BASE_DIRECTORY_RAM_NET}container/
+#BASE_DIRECTORY_RAM_NET_CONTAINER=${BASE_DIRECTORY_RAM_NET}container/
 BASE_DIRECTORY_RAM_NET_TEMP=${BASE_DIRECTORY_RAM_NET}temp/
 
 DOCKER_SOCK_FILE_NET=${BASE_DIRECTORY_RAM_NET_TEMP}docker-network-sock.json.tmp
@@ -14,7 +14,7 @@ i=$( jq length ${DOCKER_SOCK_FILE_NET} )
 echo -ne "{\n" 
 echo -ne "\t\"data\":[\n\n"
 
-while [ $i -gt 0 ]
+while [ "$i" -gt 0 ]
 do
 
     let i=$i-1
@@ -22,7 +22,7 @@ do
     curl -XGET -s --unix-socket /var/run/docker.sock "http:/v1.4/containers/${containerName}/stats?stream=false" | jq '.networks | keys' > ${DOCKER_NETWORK_FILE}
     j=$( jq length ${DOCKER_NETWORK_FILE} )
 
-    while [ $j -gt 0 ]
+    while [ "$j" -gt 0 ]
     do
         let j=$j-1
         containerNetwork=$(jq .[$j] ${DOCKER_NETWORK_FILE} | cut -d '"' -f 2 )

@@ -7,11 +7,11 @@ export SLEEP_TIME=100
 
 export LISTA_CNTNER_EM_EXEC=${SYSTEM_STATS}/containers_execucao.txt
 
-mkdir -p ${SYSTEM_DIR}
-mkdir -p ${SYSTEM_STATS}
-mkdir -p ${CONTAINER_DIR}
-mkdir -p ${TEMP_DIR}
-chmod 777 ${TEMP_DIR}
+mkdir -p "$SYSTEM_DIR"
+mkdir -p "$SYSTEM_STATS"
+mkdir -p "$CONTAINER_DIR"
+mkdir -p "$TEMP_DIR"
+chmod 777 "$TEMP_DIR"
 
 echo 0 > ${SYSTEM_DIR}/run.script
 RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)

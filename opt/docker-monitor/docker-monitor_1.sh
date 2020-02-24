@@ -16,7 +16,7 @@ chmod 777 "$TEMP_DIR"
 echo 0 > "$SYSTEM_DIR"/run.script
 RUN_SCRIPT=$(cat "$SYSTEM_DIR"/run.script)
 
-ps aux | grep -v grep | grep "/bin/bash "$DIR_INSTALL_DOCKER_MONITOR"/docker-monitor_2.sh" 1>/dev/null 2>/dev/null
+ps aux | grep -v grep | grep "/bin/bash $DIR_INSTALL_DOCKER_MONITOR/docker-monitor_2.sh" 1>/dev/null 2>/dev/null
 if [ $? -ne 0 ]
 then
 	/bin/bash "$DIR_INSTALL_DOCKER_MONITOR"/docker-monitor_2.sh & 
@@ -28,7 +28,7 @@ while [ "$RUN_SCRIPT" -eq 0 ]
 do
 	startTime=$(date +%s)
 	cat "$LISTA_CNTNER_EM_EXEC" > "$TEMP_DIR"/containers_t1.txt
-	while read cntner
+	while read -r cntner
 	do
 		curl -XGET -s --unix-socket /var/run/docker.sock http:/v1.4/containers/${cntner}/stats?stream=false > "$TEMP_DIR"/cntner.stats
 		cat "$TEMP_DIR"/cntner.stats > "$CONTAINER_DIR"/"$cntner"/cntner.stats 2>/dev/null

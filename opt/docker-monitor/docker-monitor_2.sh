@@ -6,10 +6,10 @@ function converte_byte () {
 
 	case $unidade in
 		B)
-			result_func=$valor
+			result_func="$valor"
 		;;
 		kB) 
-			result_func=$(echo ${valor}*1024 | bc)			
+			result_func=$(echo "$valor"*1024 | bc)			
 		;;
 		MiB)
 			result_func=$(echo ${valor}*1024*1024 | bc)
@@ -36,13 +36,13 @@ do
 	/bin/ls -l ${CONTAINER_DIR} | grep ^drwxr | awk '{print $9}' > ${TEMP_DIR}/containers_ls_t2.txt
 	while read dircont
 	do
-		cat ${LISTA_CNTNER_EM_EXEC} | grep ${dircont} 1>/dev/null 2>/dev/null
+		cat "$LISTA_CNTNER_EM_EXEC" | grep "$dircont" 1>/dev/null 2>/dev/null
 		if [ $? -ne 0 ]
 		then
-			rm -rf  ${CONTAINER_DIR}/${dircont}	
+			rm -rf  "$CONTAINER_DIR"/"$dircont"	
 		fi
-	done < ${TEMP_DIR}/containers_ls_t2.txt 	
-	rm -f ${TEMP_DIR}/containers_ls_t2.txt
+	done < "$TEMP_DIR"/containers_ls_t2.txt 	
+	rm -f "$TEMP_DIR"/containers_ls_t2.txt
 
 	#
 	# Cria a estrutura de diretórios dos containers em execução 
@@ -52,16 +52,16 @@ do
 		container=$(echo $cntner | awk '{print $2}')
 		if [ ! -d ${CONTAINER_DIR}/${container} ]
         then
-			mkdir ${CONTAINER_DIR}/${container}
-			mkdir ${CONTAINER_DIR}/${container}/cpu
-			mkdir ${CONTAINER_DIR}/${container}/memory
-			mkdir ${CONTAINER_DIR}/${container}/network
-			mkdir ${CONTAINER_DIR}/${container}/disc
-			mkdir ${CONTAINER_DIR}/${container}/system
+			mkdir "$CONTAINER_DIR"/"$container"
+			mkdir "$CONTAINER_DIR"/"$container"/cpu
+			mkdir "$CONTAINER_DIR"/"$container"/memory
+			mkdir "$CONTAINER_DIR"/"$container"/network
+			mkdir "$CONTAINER_DIR"/"$container"/disc
+			mkdir "$CONTAINER_DIR"/"$container"/system
 		fi
 
-		temp1=$(echo $cntner | awk '{print $3}')
-		temp2=$(echo $temp1 | sed -n -r 's/(.*)%/\1/p')
+		temp1=$(echo "$cntner" | awk '{print $3}')
+		temp2=$(echo "$temp1" | sed -n -r 's/(.*)%/\1/p')
 		echo $temp2 > ${CONTAINER_DIR}/${container}/cpu/usage
 		
 		temp1=$(echo $cntner | awk '{print $4}')

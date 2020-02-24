@@ -36,7 +36,7 @@ do
 	/bin/ls -l "$CONTAINER_DIR" | grep ^drwxr | awk '{print $9}' > "$TEMP_DIR"/containers_ls_t2.txt
 	while read dircont
 	do
-		cat "$LISTA_CNTNER_EM_EXEC" | grep "$dircont" 1>/dev/null 2>/dev/null
+		grep "$dircont" "$LISTA_CNTNER_EM_EXEC" 1>/dev/null 2>/dev/null
 		if [ $? -ne 0 ]
 		then
 			rm -rf  "${CONTAINER_DIR:?}"/"${dircont:?}"	

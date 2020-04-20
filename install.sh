@@ -4,6 +4,8 @@
 #
 # 
 
+apt-get install -y bc jq
+
 cp -f systemd/docker-monitor.service /etc/systemd/system/
 
 systemctl daemon-reload
@@ -30,9 +32,9 @@ chmod 750 /opt/docker-monitor/docker-discovery.sh
 
 usermod -a -G docker zabbix
 
-if [ -e  /etc/zabbix/zabbix_agentd.conf.d ]
+if [ -e  /etc/zabbix/zabbix_agentd.d ]
 then
-	cp -f etc/zabbix/zabbix_agentd.conf.d/userparameter_docker-monitor.conf /etc/zabbix/zabbix_agentd.conf.d/userparameter_docker-monitor.conf
+	cp -f etc/zabbix/zabbix_agentd.conf.d/userparameter_docker-monitor.conf /etc/zabbix/zabbix_agentd.d/userparameter_docker-monitor.conf
 else
 	echo "Não foi possivel localizar a pasta de userparameters do agente do zabbix, verifique se o agente esta instalado"
 fi

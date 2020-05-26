@@ -30,6 +30,13 @@ chmod 750 /opt/docker-monitor/docker-monitor_2.sh
 chmod 750 /opt/docker-monitor/docker-interfaces.sh
 chmod 750 /opt/docker-monitor/docker-discovery.sh
 
+chown zabbix:zabbix /opt/docker-monitor/docker-monitor.sh
+chown zabbix:zabbix /opt/docker-monitor/docker-monitor_1.sh
+chown zabbix:zabbix /opt/docker-monitor/docker-monitor_2.sh
+chown zabbix:zabbix /opt/docker-monitor/docker-interfaces.sh
+chown zabbix:zabbix /opt/docker-monitor/docker-discovery.sh
+
+
 usermod -a -G docker zabbix
 
 if [ -e  /etc/zabbix/zabbix_agentd.d ]

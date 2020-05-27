@@ -1,6 +1,6 @@
 #!/bin/bash 
 #
-# Esse script é o responsavel por disponibilizar as estatisticas disponibilizadas pelo comando "docker system df -v"
+# Esse script é o responsavel por disponibilizar as estatisticas geradas pelo comando "docker system df -v"
 #
 SLEEP_TIME_CNTR_SIZE=300
 

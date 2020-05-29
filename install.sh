@@ -4,7 +4,7 @@
 #
 # 
 
-apt-get install -y bc jq
+apt-get install -y bc jq curl
 
 cp -f systemd/docker-monitor.service /etc/systemd/system/
 

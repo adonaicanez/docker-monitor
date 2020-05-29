@@ -4,7 +4,7 @@
 #
 SLEEP_TIME_CNTR_SIZE=300
 
-docker system df -v | grep -A 100 "CONTAINER ID" | grep -B 100 "\n" > ${TEMP_DIR}/container.size.tmp
+docker system df -v | grep -A 100 "CONTAINER ID" | grep -B 100 "\n" | grep -v Exited> ${TEMP_DIR}/container.size.tmp
 
 RUN_SCRIPT=$(cat ${SYSTEM_DIR}/run.script)
 while read linha

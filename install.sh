@@ -36,7 +36,6 @@ chown zabbix:zabbix /opt/docker-monitor/docker-monitor_2.sh
 chown zabbix:zabbix /opt/docker-monitor/docker-interfaces.sh
 chown zabbix:zabbix /opt/docker-monitor/docker-discovery.sh
 
-
 usermod -a -G docker zabbix
 
 if [ -e  /etc/zabbix/zabbix_agentd.d ]

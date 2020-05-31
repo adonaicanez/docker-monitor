@@ -1,5 +1,7 @@
 #!/bin/bash
 
+./docker-monitor_vars.sh
+
 function converte_byte () {
 	valor="$(echo "$1" | sed -n -r 's/([[:digit:]\.]*).*/\1/p')"
 	unidade="$(echo "$1" | sed -n -r 's/([[:digit:]\.]*)(.*)/\2/p')"

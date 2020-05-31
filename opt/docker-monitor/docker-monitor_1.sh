@@ -1,11 +1,6 @@
 #!/bin/bash
 
-export CONTAINER_DIR=${SYSTEM_DIR}/container
-export SYSTEM_STATS=${SYSTEM_DIR}/system
-export TEMP_DIR=${SYSTEM_DIR}/temp
-export SLEEP_TIME=100 
-
-export LISTA_CNTNER_EM_EXEC=${SYSTEM_STATS}/containers_execucao.txt
+./docker-monitor_vars.sh
 
 mkdir -p "$SYSTEM_DIR"
 mkdir -p "$SYSTEM_STATS"

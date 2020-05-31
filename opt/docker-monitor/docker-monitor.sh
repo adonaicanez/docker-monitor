@@ -1,7 +1,6 @@
 #!/bin/bash
 
-export SYSTEM_DIR=/dev/shm/docker-monitor
-export DIR_INSTALL_DOCKER_MONITOR=/opt/docker-monitor
+./docker-monitor_vars.sh
 
 OPCAO=$1
 

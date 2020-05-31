@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Esse script disponibiliza as estatisticas que são geradas cma a execução do comando "docker stats"
+#
+#
+
 
 ./docker-monitor_vars.sh
 

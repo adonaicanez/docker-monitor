@@ -19,7 +19,7 @@ case ${OPCAO} in
 	stop)
 		echo 1 > ${SYSTEM_DIR}/run.script
 	;;
-		*)
+       *)
 		echo "Use para iniciar e parar a coleta das estatisticas."
 		echo "Ex.: ./docker-monitor.sh start"
 		echo "./docker-monitor.sh stop"

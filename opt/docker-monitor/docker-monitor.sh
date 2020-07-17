@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./docker-monitor_vars.sh
+source /opt/docker-monitor/docker-monitor_vars.sh
 
 OPCAO=$1
 

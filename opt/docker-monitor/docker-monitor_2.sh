@@ -5,7 +5,7 @@
 #
 
 
-./docker-monitor_vars.sh
+source /opt/docker-monitor/docker-monitor_vars.sh
 
 function converte_byte () {
 	valor="$(echo "$1" | sed -n -r 's/([[:digit:]\.]*).*/\1/p')"

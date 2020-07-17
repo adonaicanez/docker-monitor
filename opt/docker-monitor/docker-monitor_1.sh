@@ -4,7 +4,7 @@
 #
 #
 
-./docker-monitor_vars.sh
+source /opt/docker-monitor/docker-monitor_vars.sh
 
 mkdir -p "$SYSTEM_DIR"
 mkdir -p "$SYSTEM_STATS"

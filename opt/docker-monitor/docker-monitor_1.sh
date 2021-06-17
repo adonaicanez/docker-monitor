@@ -49,7 +49,7 @@ do
 				mkdir "$CONTAINER_DIR"/"$cntner"/network/"$neteth"
 			fi			
 			cat "$CONTAINER_DIR"/"$cntner"/cntner.stats | jq .networks."$neteth".rx_bytes > "$CONTAINER_DIR"/"$cntner"/network/"$neteth"/rx_bytes
-			cat "$CONTAINER_DIR"/"$cntner"/cntner.stats | jq .networks.$"neteth".tx_bytes > "$CONTAINER_DIR"/"$cntner"/network/"$neteth"/tx_bytes
+			cat "$CONTAINER_DIR"/"$cntner"/cntner.stats | jq .networks."$neteth".tx_bytes > "$CONTAINER_DIR"/"$cntner"/network/"$neteth"/tx_bytes
 		done < "$TEMP_DIR"/temp_network.txt
 		rm -f "$TEMP_DIR"/temp_network.txt
 	
